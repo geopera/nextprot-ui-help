@@ -27,7 +27,10 @@ echo "deploying application on github/$BASE_DIR"
 }
 
 # build current version of the aplication
+./node_modules/.bin/bower install
 BASE=$BASE_DIR ./node_modules/.bin/grunt 
+
+mkdir build; cp -a demo dist bower_components build
 
 # switch branch to gh-pages
 git checkout gh-pages
