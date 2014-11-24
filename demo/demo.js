@@ -1,5 +1,5 @@
 (function (ng, undefined) {'use strict';
-	angular.module('main', ['ngResource','ngCMS'])
+	angular.module('main', ['ngResource','npHelp'])
 
 	.config(function($routeProvider, $locationProvider, $provide) {
 		// Use the bang prefix for Google ajax crawlability
@@ -11,21 +11,17 @@
 		$locationProvider.hashPrefix('!');
 
 		$routeProvider
-		    .when('/blog/:year?/:month?/:day?/:title?', {templateUrl: 'html/ng-cms.doc.html'})
-		    .when('/docs/:article', {templateUrl: 'html/ng-cms.doc.html'})
-	    	.otherwise({ redirectTo: '/' });
+			.when('/entity/:entity', { templateUrl: "html/np-help.element.html"})
+	    .when('/blog/:year?/:month?/:day?/:title?', {templateUrl: 'html/np-help.doc.html'})
+	    .when('/docs/:article', {templateUrl: 'html/np-help.doc.html'})
+    	.otherwise({ redirectTo: '/' });
 		
 	});
 
 
 	angular.module('main').run(function ($log,gitHubContent) {
   	$log.info("init githubdoc");
-  	gitHubContent.initialize({
-  		  zenEdit:false,
-          root:'.', // specify the root of RDF entity routes
-          githubRepo:'aerobatic/markdown-content',
-          githubToken:'2e36ce76cfb03358f0a38630007840e7cb432a24'
-      });
+  	gitHubContent.initialize();
 	});
 
 })(angular);
